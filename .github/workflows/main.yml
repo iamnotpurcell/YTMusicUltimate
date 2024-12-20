@@ -88,11 +88,10 @@ jobs:
           cd ${{ github.workspace }}/main
           cyan -i YouTubeMusic.ipa -o packages/YTMusicUltimate.ipa -uwsf packages/$tweakName
 
-      - name: Create Release
-        id: create_release
-        uses: softprops/action-gh-release@v2.0.6
+      - name: upload
+        uses: actions/upload-artifact@v4
+        if: ${{ always() }}
         with:
-          tag_name: YTMusicUltimate-v${{ github.run_number }}
           name: YTMusicUltimate-v${{ github.run_number }}
-          files: main/packages/*.ipa
-          draft: true
+          path: main/packages/*.ipa
+
